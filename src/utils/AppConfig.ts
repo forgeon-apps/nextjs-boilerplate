@@ -1,6 +1,6 @@
 export const AppConfig = {
   site_name: 'Starter',
-  title: 'Next.js Boilerplate (v1)',
+  title: 'Next.js Boilerplate (v2)',
   description:
     'Starter code for your Next.js blog Boilerplate with Tailwind CSS',
   url: 'https://example.com',
