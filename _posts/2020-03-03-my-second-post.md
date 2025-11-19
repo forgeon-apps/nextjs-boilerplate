@@ -22,7 +22,7 @@ When you ship something small, you get a few superpowers:
 
 Example of a simple error screen you might hit in the browser:
 
-![Error](@@baseUrl@@/assets/images/posts/error.png)
+<img src="/assets/images/posts/error.png" alt="Error" width="100" />
 
 Instead of panicking, treat it like data:
 

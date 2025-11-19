@@ -36,7 +36,7 @@ That way, you’re never more than one step away from something that still works
 
 Example error screen during a refactor:
 
-![Error](@@baseUrl@@/assets/images/posts/error.png)
+<img src="/assets/images/posts/error.png" alt="Error" width="100" />
 
 Treat this as a signal, not a failure.  
 You’re just shining light on paths that were already fragile.

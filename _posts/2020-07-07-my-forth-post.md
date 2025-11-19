@@ -24,7 +24,7 @@ They’re short stories your system writes about itself.
 
 Example of a vague log vs a useful one:
 
-![Error](@@baseUrl@@/assets/images/posts/error.png)
+<img src="/assets/images/posts/error.png" alt="Error" width="100" />
 
 A bad log:
 

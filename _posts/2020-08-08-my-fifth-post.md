@@ -37,7 +37,7 @@ The key is to **observe what feels good to build with**.
 
 Example screenshot of an error or broken experiment:
 
-![Error](@@baseUrl@@/assets/images/posts/error.png)
+<img src="/assets/images/posts/error.png" alt="Error" width="100" />
 
 That error isn’t failure—it’s a signal that you’re pushing into territory you didn’t fully understand before.
 
