@@ -1,29 +1,29 @@
-import React from 'react';
+import React from 'react'
 
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next'
 
-import { BlogGallery, IBlogGalleryProps } from '../blog/BlogGallery';
-import { Meta } from '../layout/Meta';
-import { IPaginationProps } from '../pagination/Pagination';
-import { Main } from '../templates/Main';
-import { AppConfig } from '../utils/AppConfig';
-import { getAllPosts } from '../utils/Content';
-import { convertTo2D } from '../utils/Pagination';
+import { BlogGallery, BlogGalleryProps } from '../blog/BlogGallery'
+import { Meta } from '../layout/Meta'
+import { IPaginationProps } from '../pagination/Pagination'
+import { Main } from '../templates/Main'
+import { AppConfig } from '../utils/AppConfig'
+import { getAllPosts } from '../utils/Content'
+import { convertTo2D } from '../utils/Pagination'
 
 type IPageUrl = {
-  page: string;
-};
+  page: string
+}
 
-const PaginatePosts = (props: IBlogGalleryProps) => (
+const PaginatePosts = (props: BlogGalleryProps) => (
   <Main meta={<Meta title="Lorem ipsum" description="Lorem ipsum" />}>
     <BlogGallery posts={props.posts} pagination={props.pagination} />
   </Main>
-);
+)
 
 export const getStaticPaths: GetStaticPaths<IPageUrl> = async () => {
-  const posts = getAllPosts(['slug']);
+  const posts = getAllPosts(['slug'])
 
-  const pages = convertTo2D(posts, AppConfig.pagination_size);
+  const pages = convertTo2D(posts, AppConfig.pagination_size)
 
   return {
     paths: pages.slice(1).map((_, index) => ({
@@ -35,29 +35,29 @@ export const getStaticPaths: GetStaticPaths<IPageUrl> = async () => {
       },
     })),
     fallback: false,
-  };
-};
+  }
+}
 
 export const getStaticProps: GetStaticProps<
-  IBlogGalleryProps,
+  BlogGalleryProps,
   IPageUrl
 > = async ({ params }) => {
-  const posts = getAllPosts(['title', 'date', 'slug']);
+  const posts = getAllPosts(['title', 'date', 'slug'])
 
-  const pages = convertTo2D(posts, AppConfig.pagination_size);
-  const currentPage = Number(params!.page.replace('page', ''));
-  const currentIndex = currentPage - 1;
+  const pages = convertTo2D(posts, AppConfig.pagination_size)
+  const currentPage = Number(params!.page.replace('page', ''))
+  const currentIndex = currentPage - 1
 
-  const pagination: IPaginationProps = {};
+  const pagination: IPaginationProps = {}
 
   if (currentPage < pages.length) {
-    pagination.next = `page${currentPage + 1}`;
+    pagination.next = `page${currentPage + 1}`
   }
 
   if (currentPage === 2) {
-    pagination.previous = '/';
+    pagination.previous = '/'
   } else {
-    pagination.previous = `page${currentPage - 1}`;
+    pagination.previous = `page${currentPage - 1}`
   }
 
   return {
@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps<
       posts: pages[currentIndex],
       pagination,
     },
-  };
-};
+  }
+}
 
-export default PaginatePosts;
+export default PaginatePosts

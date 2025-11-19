@@ -1,24 +1,24 @@
-import React from 'react';
+import React from 'react'
 
-import Head from 'next/head';
-import { useRouter } from 'next/router';
+import Head from 'next/head'
+import { useRouter } from 'next/router'
 
-import { AppConfig } from '../utils/AppConfig';
-import { addTrailingSlash } from '../utils/Url';
+import { AppConfig } from '../utils/AppConfig'
+import { addTrailingSlash } from '../utils/Url'
 
 type IMetaProps = {
-  title: string;
-  description: string;
-  canonical?: string;
+  title: string
+  description: string
+  canonical?: string
   post?: {
-    image: string;
-    date: string;
-    modified_date: string;
-  };
-};
+    image: string
+    date: string
+    modified_date: string
+  }
+}
 
 const Meta = (props: IMetaProps) => {
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <>
@@ -30,27 +30,8 @@ const Meta = (props: IMetaProps) => {
           key="viewport"
         />
         <link
-          rel="apple-touch-icon"
-          href={`${router.basePath}/apple-touch-icon.png`}
-          key="apple"
-        />
-        <link
           rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href={`${router.basePath}/favicon-32x32.png`}
-          key="icon32"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href={`${router.basePath}/favicon-16x16.png`}
-          key="icon16"
-        />
-        <link
-          rel="icon"
-          href={`${router.basePath}/favicon.ico`}
+          href={`${router.basePath}/forgeon.ico`}
           key="favicon"
         />
         <title>{`${props.title} | ${AppConfig.site_name}`}</title>
@@ -112,40 +93,40 @@ const Meta = (props: IMetaProps) => {
               dangerouslySetInnerHTML={{
                 __html: `
           {
-            "description": "${
+            'description': '${
               props.description ? props.description : AppConfig.description
-            }",
-            "author": {
-              "@type": "Person",
-              "name": "${AppConfig.author}"
+            }',
+            'author': {
+              '@type': 'Person',
+              'name': '${AppConfig.author}'
             },
-            "@type": "BlogPosting",
-            "url": "${AppConfig.url}${router.basePath}${addTrailingSlash(
+            '@type': 'BlogPosting',
+            'url': '${AppConfig.url}${router.basePath}${addTrailingSlash(
                   router.asPath
-                )}",
-            "publisher": {
-              "@type": "Organization",
-              "logo": {
-                "@type": "ImageObject",
-                "url": "${AppConfig.url}${
+                )}',
+            'publisher': {
+              '@type': 'Organization',
+              'logo': {
+                '@type': 'ImageObject',
+                'url': '${AppConfig.url}${
                   router.basePath
-                }/assets/images/logo.png"
+                }/assets/images/logo.png'
               },
-              "name": "${AppConfig.author}"
+              'name': '${AppConfig.author}'
             },
-            "headline": "${props.title} | ${AppConfig.site_name}",
-            "image": ["${AppConfig.url}${router.basePath}${props.post.image}"],
-            "datePublished": "${new Date(props.post.date).toISOString()}",
-            "dateModified": "${new Date(
+            'headline': '${props.title} | ${AppConfig.site_name}',
+            'image': ['${AppConfig.url}${router.basePath}${props.post.image}'],
+            'datePublished': '${new Date(props.post.date).toISOString()}',
+            'dateModified': '${new Date(
               props.post.modified_date
-            ).toISOString()}",
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "@id": "${AppConfig.url}${router.basePath}${addTrailingSlash(
+            ).toISOString()}',
+            'mainEntityOfPage': {
+              '@type': 'WebPage',
+              '@id': '${AppConfig.url}${router.basePath}${addTrailingSlash(
                   router.asPath
-                )}"
+                )}'
             },
-            "@context": "http://schema.org"
+            '@context': 'http://schema.org'
           }`,
               }}
               key="ldjson"
@@ -154,7 +135,7 @@ const Meta = (props: IMetaProps) => {
         )}
       </Head>
     </>
-  );
-};
+  )
+}
 
-export { Meta };
+export { Meta }

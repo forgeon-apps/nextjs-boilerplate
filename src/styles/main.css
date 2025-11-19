@@ -1,13 +1,13 @@
-@tailwind base;
+@import "tailwindcss/base";
 
 a {
-  @apply text-blue-700;
+  color: #1d4ed8;
 }
 
 a:hover {
-  @apply underline;
+  text-decoration: underline;
 }
 
-@tailwind components;
+@import "tailwindcss/components";
 
-@tailwind utilities;
+@import "tailwindcss/utilities";

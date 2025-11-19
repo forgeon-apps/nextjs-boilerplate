@@ -1,65 +1,120 @@
-import React, { ReactNode } from 'react';
+import type { ReactNode } from 'react'
 
-import Link from 'next/link';
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-import { Navbar } from '../navigation/Navbar';
-import { AppConfig } from '../utils/AppConfig';
+import { AppConfig } from '../utils/AppConfig'
 
-type IMainProps = {
-  meta: ReactNode;
-  children: ReactNode;
-};
+export type MainProps = {
+  meta: ReactNode
+  children: ReactNode
+}
 
-const Main = (props: IMainProps) => (
-  <div className="antialiased w-full text-gray-700 px-3 md:px-0">
-    {props.meta}
+type NavItem = {
+  href: string
+  label: string
+  external?: boolean
+}
 
-    <div className="max-w-screen-md mx-auto">
-      <div className="border-b border-gray-300">
-        <div className="pt-16 pb-8">
-          <div className="font-semibold text-3xl text-gray-900">
-            {AppConfig.title}
+const NAV_ITEMS: NavItem[] = [
+  { href: '/', label: 'Home' },
+  { href: '/ssr-test/', label: 'SSR' },
+  { href: '/playground/', label: 'Playground' },
+  { href: '/about/', label: 'About' },
+  {
+    href: 'https://github.com/forgeon-apps/nextjs-boilerplate',
+    label: 'GitHub',
+    external: true,
+  },
+]
+
+function NavTab({ item, isActive }: { item: NavItem; isActive: boolean }) {
+  const baseClasses =
+    'inline-flex items-center rounded-md px-4 py-1.5 text-sm font-medium transition-colors border'
+
+  const activeClasses =
+    'bg-gray-900 text-white border-gray-900 shadow-sm cursor-default'
+  const inactiveClasses =
+    'bg-gray-100 text-gray-700 border-transparent hover:bg-gray-200 hover:text-gray-900'
+
+  const className = `${baseClasses} ${
+    isActive ? activeClasses : inactiveClasses
+  }`
+
+  if (item.external) {
+    return (
+      <a
+        href={item.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
+        {item.label}
+      </a>
+    )
+  }
+
+  return (
+    <Link href={item.href} passHref>
+      <a className={className}>{item.label}</a>
+    </Link>
+  )
+}
+
+export function Main({ meta, children }: MainProps) {
+  const year = new Date().getFullYear()
+  const router = useRouter()
+
+  return (
+    <div className="w-full px-3 text-gray-700 antialiased md:px-0">
+      {meta}
+
+      <div className="mx-auto max-w-screen-md">
+        <header className="border-b border-gray-300">
+          <div className="pt-16 pb-6">
+            <h1 className="text-3xl font-semibold text-gray-900">
+              {AppConfig.title}
+            </h1>
+            <p className="mt-2 text-xl text-gray-700">
+              {AppConfig.description}
+            </p>
           </div>
-          <div className="text-xl">{AppConfig.description}</div>
-        </div>
-        <div>
-          <Navbar>
-            <li className="mr-6">
-              <Link href="/">
-                <a>Home</a>
-              </Link>
-            </li>
-            <li className="mr-6">
-              <Link href="/about/">
-                <a>About</a>
-              </Link>
-            </li>
-            <li className="mr-6">
-              <a href="https://github.com/ixartz/Next-js-Blog-Boilerplate">
-                GitHub
-              </a>
-            </li>
-          </Navbar>
-        </div>
-      </div>
 
-      <div className="text-xl py-5">{props.children}</div>
+          <nav className="pb-4">
+            <div className="inline-flex flex-wrap gap-2 rounded-md bg-gray-50 p-1">
+              {NAV_ITEMS.map((item) => {
+                const isActive =
+                  !item.external &&
+                  (router.pathname === item.href ||
+                    (item.href !== '/' &&
+                      router.pathname.startsWith(item.href.replace(/\/$/, ''))))
 
-      <div className="border-t border-gray-300 text-center py-8 text-sm">
-        © Copyright {new Date().getFullYear()} {AppConfig.title}. Powered with{' '}
-        <span role="img" aria-label="Love">
-          ♥
-        </span>{' '}
-        by <a href="https://creativedesignsguru.com">CreativeDesignsGuru</a>
-        {/*
-         * PLEASE READ THIS SECTION
-         * We'll really appreciate if you could have a link to our website
-         * The link doesn't need to appear on every pages, one link on one page is enough.
-         * Thank you for your support it'll mean a lot for us.
-         */}
+                return (
+                  <NavTab key={item.label} item={item} isActive={isActive} />
+                )
+              })}
+            </div>
+          </nav>
+        </header>
+
+        <main className="py-5 text-xl">{children}</main>
+
+        <footer className="border-t border-gray-300 py-8 text-center text-sm text-gray-600">
+          © {year} {AppConfig.title}. Powered with{' '}
+          <span role="img" aria-label="Love">
+            ♥
+          </span>{' '}
+          by{' '}
+          <a
+            href="https://forgeon.io"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:no-underline"
+          >
+            Forgeon
+          </a>
+        </footer>
       </div>
     </div>
-  </div>
-);
-
-export { Main };
+  )
+}

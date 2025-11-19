@@ -1,12 +1,10 @@
-import React from 'react';
+// src/pages/_app.tsx
+import type { AppProps } from 'next/app'
 
-import { AppProps } from 'next/app';
+// Global CSS (Tailwind entry + prism theme)
+import '../styles/main.css'
+import '../styles/prism-a11y-dark.css'
 
-import '../styles/main.css';
-import '../styles/prism-a11y-dark.css';
-
-const MyApp = ({ Component, pageProps }: AppProps) => (
-  <Component {...pageProps} />
-);
-
-export default MyApp;
+export default function MyApp({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />
+}
