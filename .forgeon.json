@@ -1,0 +1,9 @@
+{
+  "type": "server",
+  "framework": "nextjs",
+  "buildSystem": "template",
+  "build": "pnpm install --frozen-lockfile && pnpm run build",
+  "start": "pnpm run start -- -p $PORT",
+  "port": 3000,
+  "internalPort": 3000
+}
