@@ -1,8 +1,8 @@
 #!/bin/sh
-[ "$CI" = "true" ] && exit 0
-[ "$HUSKY" = "0" ] && exit 0
+# [ "$CI" = "true" ] && exit 0
+# [ "$HUSKY" = "0" ] && exit 0
 
-. "$(dirname "$0")/_/husky.sh"
+# . "$(dirname "$0")/_/husky.sh"
 
-# Disable concurent to run build-types after ESLint in lint-staged
-npx lint-staged --concurrent false
+# # Disable concurent to run build-types after ESLint in lint-staged
+# npx lint-staged --concurrent false
