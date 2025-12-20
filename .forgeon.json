@@ -1,9 +1,12 @@
 {
-  "type": "server",
+  "schema_version": "v1",
   "framework": "nextjs",
-  "buildSystem": "template",
-  "build": "pnpm install --frozen-lockfile && pnpm run build",
-  "start": "pnpm run start -- -p $PORT",
+  "type": "frontend",
+  "build_system": "template",
+  "output_kind": "server",
+  "runtime": "node",
+  "version": "18",
   "port": 3000,
-  "internalPort": 3000
+  "build": "pnpm install --frozen-lockfile && pnpm run build",
+  "start": "pnpm start -p $PORT"
 }
