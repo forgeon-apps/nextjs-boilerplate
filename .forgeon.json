@@ -1,13 +1,13 @@
 {
   "schema_version": "v1",
   "framework": "nextjs",
-  "type": "frontend",
+  "type": "server",
   "build_system": "nixpacks",
   "deployment_target": "docker",
   "runtime": "node",
   "version": "20",
   "port": 3000,
-  "build": "pnpm install --frozen-lockfile && pnpm run build",
+  "build": "corepack enable || true; corepack prepare pnpm@8.15.9 --activate; pnpm install --frozen-lockfile && pnpm run build",
   "start": "pnpm start -- -p $PORT",
   "build_meta": { "pm": "pnpm" }
 }
